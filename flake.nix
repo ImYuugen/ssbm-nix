@@ -120,7 +120,7 @@
                 type = types.str;
                 description = "The folder where your SLP replays should be saved.";
               };
-              useMonthlySubfolders = mkEnableOption "Save replays to monthly subfolders";
+              useMonthlySubfolders = mkEnableOption "Save replays to monthly subfolders" // { default = false; };
               spectateSlpPath = mkOption {
                 default = "${cfg.slippi-launcher.rootSlpPath}/Spectate";
                 type = types.nullOr types.str;
@@ -147,7 +147,7 @@
           };
           config = {
             home.packages = [ (mkIf cfg.slippi-launcher.enable pkgs.slippi-launcher) ];
-            xdg.configFile."Slippi Launcher/Settings".source =
+            xdg.configFile."Slippi Launcher/Settings".source = lib.file.mkOutOfStoreSymlink (
               let
                 jsonFormat = pkgs.formats.json { };
               in
@@ -168,7 +168,8 @@
                   # Advanced settings
                   autoUpdateLauncher = false;
                 };
-              };
+              }
+            );
           };
         };
     };
