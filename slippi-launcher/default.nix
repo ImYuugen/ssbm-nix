@@ -18,8 +18,11 @@ stdenvNoCC.mkDerivation rec {
       hash = "sha256-zYxSVbxERLtz5/9IS8PUft6ZQw6kQtSUp0/KmmA/bmM=";
     };
 
+    buildInputs = [
+      makeWrapper
+    ];
+
     extraInstallCommands = ''
-      source "${makeWrapper}/nix-support/setup-hook"
       wrapProgram $out/bin/slippi-launcher-${version} \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
     '';
