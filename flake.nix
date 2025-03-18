@@ -133,23 +133,23 @@
               };
               # Netplay
               netplayDolphinPath = mkOption {
-                default = "${pkgs.slippi-netplay}";
+                default = "${self.packages.${pkgs.system}.slippi-netplay}";
                 type = types.str;
                 description = "The path to the folder containing the Netplay Dolphin Executable";
               };
               # Playback
               playbackDolphinPath = mkOption {
-                default = "${pkgs.slippi-playback}";
+                default = "${self.packages.${pkgs.system}.slippi-playback}";
                 type = types.str;
                 description = "The path to the folder containing the Playback Dolphin Executable";
               };
             };
           };
           config = {
-            home.packages = [ (mkIf cfg.slippi-launcher.enable pkgs.slippi-launcher) ];
+            home.packages = [ (mkIf cfg.slippi-launcher.enable self.packages.${pkgs.system}.slippi-launcher) ];
             xdg.configFile."Slippi Launcher/Settings".source = lib.file.mkOutOfStoreSymlink (
               let
-                jsonFormat = pkgs.formats.json { };
+                jsonFormat = self.packages.${pkgs.system}.formats.json { };
               in
               jsonFormat.generate "slippi-config" {
                 settings = {
