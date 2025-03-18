@@ -147,7 +147,7 @@
             home.packages = [ (mkIf cfg.slippi-launcher.enable self.packages.${pkgs.system}.slippi-launcher) ];
             xdg.configFile."Slippi Launcher/Settings".source = config.lib.file.mkOutOfStoreSymlink (
               let
-                jsonFormat = self.packages.${pkgs.system}.formats.json { };
+                jsonFormat = pkgs.formats.json { };
               in
               jsonFormat.generate "slippi-config" {
                 settings = {
