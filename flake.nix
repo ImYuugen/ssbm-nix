@@ -17,13 +17,13 @@
     in
     {
 
-      overlay = final: prev: import ./overlay.nix { inherit slippi-desktop final prev; };
+      overlays.default = final: prev: import ./overlay.nix { inherit slippi-desktop final prev; };
 
       apps = forAllSystems (system:
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ self.overlay ];
+            overlays = [ self.overlays.default ];
           };
         in
         {
@@ -41,7 +41,7 @@
         let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ self.overlay ];
+            overlays = [ self.overlays.default ];
           };
         in
         {
@@ -59,7 +59,7 @@
           /* dat-texture-wizard = pkgs.dat-texture-wizard; */
         });
 
-      nixosModule = { pkgs, config, ... }:
+      nixosModules.default = { pkgs, config, ... }:
         let
           cfg = config.ssbm;
         in
