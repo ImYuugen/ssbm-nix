@@ -4,20 +4,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     slippi-desktop.url = "github:project-slippi/slippi-desktop-app";
     slippi-desktop.flake = false;
-    home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   description = "Nix expressions for Super Smash Bros. Melee players.";
 
-  outputs = { self, nixpkgs, nix, slippi-desktop, home-manager, ... }@inputs:
+  outputs = { self, nixpkgs, nix, slippi-desktop, ... }@inputs:
     let
 
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
-      hmLib = home-manager.lib;
 
     in
     {
@@ -150,7 +145,7 @@
           };
           config = {
             home.packages = [ (mkIf cfg.slippi-launcher.enable self.packages.${pkgs.system}.slippi-launcher) ];
-            xdg.configFile."Slippi Launcher/Settings".source = hmLib.file.mkOutOfStoreSymlink (
+            xdg.configFile."Slippi Launcher/Settings".source = config.lib.file.mkOutOfStoreSymlink (
               let
                 jsonFormat = self.packages.${pkgs.system}.formats.json { };
               in
