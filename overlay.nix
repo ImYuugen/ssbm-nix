@@ -7,8 +7,6 @@ with final.pkgs; rec {
 
   wiimms-iso-tools = callPackage ./wit { };
 
-  gecko = callPackage ./gecko { };
-
   powerpc-eabi-assembling = callPackage ./powerpc-eabi-as { };
 
   slippi-playback = callPackage ./slippi {

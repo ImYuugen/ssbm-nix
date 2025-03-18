@@ -49,7 +49,6 @@
           slippi-netplay = pkgs.slippi-netplay;
           slippi-playback = pkgs.slippi-playback;
           slippi-launcher = pkgs.slippi-launcher;
-          gecko = pkgs.gecko;
           powerpc-eabi-assembling = pkgs.powerpc-eabi-assembling;
           slippi-netplay-chat-edition = pkgs.slippi-netplay-chat-edition;
           gcmtool = pkgs.gcmtool;
