@@ -98,11 +98,10 @@
             environment.systemPackages = [ (mkIf cfg.keyb0xx.enable (pkgs.keyb0xx.override { keyb0xxconfig = cfg.keyb0xx.config; })) ];
           };
         };
-      homeManagerModules.default = { pkgs, config, ... }:
+      homeManagerModules.default = { pkgs, config, lib, ... }:
         let
           cfg = config.ssbm;
-        in
-        with nixpkgs.lib; {
+        in with lib; {
           options.ssbm = {
             slippi-launcher = {
               enable = mkEnableOption "Install Slippi Launcher";
