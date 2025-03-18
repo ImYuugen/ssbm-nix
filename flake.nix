@@ -98,7 +98,7 @@
             environment.systemPackages = [ (mkIf cfg.keyb0xx.enable (pkgs.keyb0xx.override { keyb0xxconfig = cfg.keyb0xx.config; })) ];
           };
         };
-      homeManagerModule = { pkgs, config, ... }:
+      homeManagerModules.default = { pkgs, config, ... }:
         let
           cfg = config.ssbm;
         in
